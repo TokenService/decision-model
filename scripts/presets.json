@@ -1,0 +1,89 @@
+{
+  "presets": {
+    "route-capability": {
+      "description": "Pick which gateway capability should serve a request before spending on a generation.",
+      "questions": {
+        "capability": {
+          "type": "choice",
+          "instructions": "Which single capability should serve this request? Judge only the deliverable the user wants. Style, subject and language are preferences that break ties, not conditions to meet.",
+          "criteria": {
+            "image": "a still picture, an edit, or a picture format",
+            "video": "moving footage, frames, or a clip",
+            "music": "a song, instrumental, cover, or continuation",
+            "tts": "speech read aloud, or a reusable voice id",
+            "text": "none of the above, plain conversation or reasoning"
+          }
+        },
+        "needs_reference_media": {
+          "type": "noul",
+          "instructions": "Does completing this request require reference media that the provider must fetch over the public internet?",
+          "criteria": {
+            "true": "the user supplies or asks to reuse an image, video, or audio",
+            "false": "text only"
+          }
+        }
+      },
+      "thresholds": {
+        "capability": 0.5
+      },
+      "actions": ["capability"],
+      "fallback": "text"
+    },
+    "content-risk": {
+      "description": "Screen a prompt before it reaches a paid generation endpoint.",
+      "questions": {
+        "verdict": {
+          "type": "choice",
+          "instructions": "What should happen to this request? Judge only policy risk. Commercial value and effort are not reasons to lower the verdict.",
+          "criteria": {
+            "allow": "send it as-is",
+            "review": "send with moderation enabled, or ask the user to adjust",
+            "block": "do not send it"
+          }
+        },
+        "risk_level": {
+          "type": "score",
+          "instructions": "Rate the policy risk of sending this request unchanged.",
+          "criteria": [
+            "no meaningful risk",
+            "borderline, needs moderation",
+            "high risk, needs review"
+          ]
+        }
+      },
+      "thresholds": {
+        "verdict": 0.6
+      },
+      "actions": ["verdict"],
+      "fallback": "allow"
+    },
+    "reply-triage": {
+      "description": "Decide whether a user message needs a person, and how soon.",
+      "questions": {
+        "lane": {
+          "type": "choice",
+          "instructions": "Which lane should this message take? Judge only who must handle it. Topic, tone and length are preferences that break ties, not conditions to meet.",
+          "criteria": {
+            "auto_reply": "an automated answer is acceptable",
+            "answer_today": "a person should answer, but not immediately",
+            "escalate_human": "a person must intervene now"
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "instructions": "How urgent is this message?",
+          "criteria": [
+            "can wait",
+            "answer today",
+            "needs attention now"
+          ]
+        }
+      },
+      "thresholds": {
+        "lane": 0.5
+      },
+      "actions": ["lane"],
+      "fallback": "answer_today"
+    }
+  }
+}
