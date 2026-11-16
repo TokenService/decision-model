@@ -4,6 +4,14 @@
 
 Provided by [New.bi](https://api.new.bi), a professional, stable, and reliable AI model aggregation gateway.
 
+## Install with an agent
+
+Send this line to an agent. It downloads, unpacks, authenticates and runs the tool:
+
+```text
+Install and use the New.bi decision skill: download https://pub-817cae131e2b4e0a8ce0a9f8bac75462.r2.dev/down/decision-model.zip, unpack it, run python3 scripts/gateway.py login --key <your key>, confirm with doctor, then call decision --preset route-capability to choose image, video, music, speech or text.
+```
+
 Decision model CLI for an AI gateway (Jev / TypeSafe System One).
 
 - Writes no prose, only a calibrated probability per question
