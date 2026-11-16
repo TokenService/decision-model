@@ -4,6 +4,14 @@
 
 由 [New.bi](https://api.new.bi) 提供，专业、稳定、可靠的大模型聚合中转平台。
 
+## 交给 AI 安装
+
+把下面这句直接发给 agent，它会完成下载、解压、鉴权和执行：
+
+```text
+安装并使用 New.bi 决策技能：下载 https://pub-817cae131e2b4e0a8ce0a9f8bac75462.r2.dev/down/decision-model.zip，解压后运行 python3 scripts/gateway.py login --key <你的密钥>，再运行 doctor 确认，然后用 decision --preset route-capability 判断该走图片、视频、音乐、语音还是文本。
+```
+
 调用决策模型（Jev / TypeSafe System One）的命令行工具，也可以直接当 agent 技能用。
 
 输入一段 state 和几个问题，得到每个问题的概率。它不写文字。
